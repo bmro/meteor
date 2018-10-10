@@ -8,5 +8,6 @@ apt-get -qq install -y nodejs
 
 curl https://install.meteor.com/ | sh
 
-useradd -m hml
-chown -R hml:hml /usr/src/app
+useradd -m appuser
+
+su appuser -c 'meteor'
