@@ -1,11 +1,15 @@
 FROM debian:stable-slim
+LABEL maintainer "Bruno Oliveira <bruno@bono.io>"
 
-WORKDIR /usr/src/app
+RUN     apt-get -qq update && \
+        apt-get -qq install -y curl build-essential && \
+        curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+        apt-get -qq install -y nodejs && \
+        curl https://install.meteor.com/ | sh && \
+        useradd -m appuser
 
-COPY . ./
-
-RUN ./build.sh
+WORKDIR /home/appuser
 
 USER appuser
 
-WORKDIR /home/appuser
+RUN meteor --version
